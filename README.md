@@ -8,6 +8,13 @@ A test suite for **libft**, a 42 project.
 
 ## Quick start
 
+Clone the repository
+
+```
+$ git clone git@github.com:LeonardoE95/42_libft_tests.git
+$ cd 42_libft_tests
+```
+
 Save the path to the libft source code
 
 ```
@@ -31,6 +38,40 @@ Cleanup
 
 ```
 $ make clean
+```
+
+If you forget the commands just write `make` to get a help
+menu. Notice in the output the `SRC = ` line specifies the current
+value for the source directory.
+
+```
+[leo@work 42_libft_tests]$ make
+
+  Save source path
+    make setup SRC=~/libft/src/
+
+  Run all tests
+    make test
+
+  Test a single function
+    make test-ft_strlen
+
+  Clean object files
+    make clean
+
+  SRC = /home/leo/42/libft/src
+
+/* *************************************************************************** */
+/*                                                                             */
+/*                                                         :::      ::::::::   */
+/*                                                       :+:      :+:    :+:   */
+/*  The mystery of life isn't a problem to solve,      +:+ +:+         +:+     */
+/*  but a reality to experience.                     +#+  +:+       +#+        */
+/*                                                 +#+#+#+#+#+   +#+           */
+/*                                                      #+#    #+#             */
+/*                                                     ###   ####.fr           */
+/*                                                                             */
+/* *************************************************************************** */
 ```
 
 ## References
