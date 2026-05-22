@@ -1671,6 +1671,7 @@ int main(int argc, char **argv) {
     g_verbose = 1;
     char *test_name = argv[1];
     found = 0;
+    i = 0;
     while (i < n_tests) {
       if (strcmp(test_name, g_tests[i].name) == 0) {
         found = 1;
