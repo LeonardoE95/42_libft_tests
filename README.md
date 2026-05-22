@@ -24,6 +24,7 @@ Test a specific function
 
 ```
 $ make test-ft_strlen
+$ make test-memset
 ```
 
 Cleanup

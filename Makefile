@@ -60,11 +60,33 @@ OBJS = $(SRCS:.c=.o)
 
 avail.h:
 	@for f in $(ALL_FUNCS); do \
-		if [ -f "$(SRC)/$$f.c" ]; then \
-			echo "#define AVAIL_$$f 1"; \
-		else \
-			echo "#define AVAIL_$$f 0"; \
-		fi; \
+		deps=""; \
+		case $$f in \
+			ft_calloc)       deps="ft_bzero" ;; \
+			ft_isalnum)      deps="ft_isalpha ft_isdigit" ;; \
+			ft_putstr_fd)    deps="ft_strlen" ;; \
+			ft_putendl_fd)   deps="ft_putchar_fd ft_putstr_fd ft_strlen" ;; \
+			ft_strdup)       deps="ft_memcpy ft_strlen" ;; \
+			ft_strjoin)      deps="ft_strlen" ;; \
+			ft_strlcpy)      deps="ft_memcpy ft_strlen" ;; \
+			ft_strmapi)      deps="ft_strlen" ;; \
+			ft_strtrim)      deps="ft_memcpy ft_strlen" ;; \
+			ft_substr)       deps="ft_strlen" ;; \
+			ft_lstadd_front) deps="ft_lstnew" ;; \
+			ft_lstsize)      deps="ft_lstnew" ;; \
+			ft_lstlast)      deps="ft_lstnew" ;; \
+			ft_lstadd_back)  deps="ft_lstnew ft_lstlast" ;; \
+			ft_lstdelone)    deps="ft_lstnew" ;; \
+			ft_lstclear)     deps="ft_lstnew" ;; \
+			ft_lstiter)      deps="ft_lstnew" ;; \
+			ft_lstmap)       deps="ft_lstnew ft_lstclear ft_lstsize" ;; \
+		esac; \
+		avail=1; \
+		if [ ! -f "$(SRC)/$$f.c" ]; then avail=0; fi; \
+		for d in $$deps; do \
+			if [ ! -f "$(SRC)/$$d.c" ]; then avail=0; fi; \
+		done; \
+		echo "#define AVAIL_$$f $$avail"; \
 	done > $@
 
 all: $(BIN)
