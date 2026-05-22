@@ -406,7 +406,13 @@ static void test_calloc(void) {
   free(ft_res);
 
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Walloc-size"
+#if defined(__has_warning)
+# if __has_warning("-Walloc-size")
+#  pragma GCC diagnostic ignored "-Walloc-size"
+# endif
+#elif defined(__GNUC__) && (__GNUC__ >= 14)
+# pragma GCC diagnostic ignored "-Walloc-size"
+#endif
   ft_res = ft_calloc(0, 5);
   libc_res = calloc(0, 5);
   ASSERT_EQ("ft_calloc(0, 5) both NULL or both non-NULL",
