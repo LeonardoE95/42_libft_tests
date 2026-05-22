@@ -12,6 +12,7 @@ ALL_FUNCS = ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint \
             ft_lstnew ft_lstadd_front ft_lstsize ft_lstlast \
             ft_lstadd_back ft_lstdelone ft_lstclear ft_lstiter ft_lstmap
 
+
 ifndef SRC
  ifneq (,$(wildcard .srcpath))
   SRC := $(shell cat .srcpath)
@@ -19,27 +20,34 @@ ifndef SRC
 endif
 
 help:
+	@printf "\n"
+	@printf "  \033[1mSave source path\033[0m\n"
+	@printf "    make setup SRC=~/libft/src/\n"
+	@printf "\n"
+	@printf "  \033[1mRun all tests\033[0m\n"
+	@printf "    make test\n"
+	@printf "\n"
+	@printf "  \033[1mTest a single function\033[0m\n"
+	@printf "    make test-ft_strlen\n"
+	@printf "\n"
+	@printf "  \033[1mClean object files\033[0m\n"
+	@printf "    make clean\n"
+	@printf "\n"
+	@printf "  \033[0;33mSRC = $(SRC)\033[0m\n"
+	@printf "\n"
 	@printf "\033[0;36m"
 	@printf "/* *************************************************************************** */\n"
 	@printf "/*                                                                             */\n"
 	@printf "/*                                                         :::      ::::::::   */\n"
-	@printf "/*                                                         :+:      :+:    :+: */\n"
-	@printf "/*   libft tests                                       +:+ +:+         +:+     */\n"
-	@printf "/*                                                    +#+  +:+       +#+       */\n"
+	@printf "/*                                                       :+:      :+:    :+:   */\n"
+	@printf "/*  The mystery of life isn't a problem to solve,      +:+ +:+         +:+     */\n"
+	@printf "/*  but a reality to experience.                     +#+  +:+       +#+        */\n"
 	@printf "/*                                                 +#+#+#+#+#+   +#+           */\n"
-	@printf "/*                                                       #+#    #+#            */\n"
-	@printf "/*                                                      ###   ########.fr      */\n"
+	@printf "/*                                                      #+#    #+#             */\n"
+	@printf "/*                                                     ###   ####.fr           */\n"
 	@printf "/*                                                                             */\n"
 	@printf "/* *************************************************************************** */\n"
 	@printf "\033[0m\n"
-	@printf "  make setup SRC=~/libft/src/                        save source path\n"
-	@printf "\n"
-	@printf "  make test                                          run all tests\n"
-	@printf "\n"
-	@printf "  make test-ft_strlen                                test a single function\n"
-	@printf "\n"
-	@printf "  make clean                                         clean object files\n"
-	@printf "\n"
 
 setup:
 ifndef SRC
@@ -92,13 +100,13 @@ avail.h:
 all: $(BIN)
 
 $(BIN): libft_test.c libft_stubs.c avail.h $(OBJS)
-	$(CC) $(CFLAGS) -Wl,--wrap=malloc,--wrap=free -o $@ libft_test.c libft_stubs.c $(OBJS)
+	@$(CC) $(CFLAGS) -Wl,--wrap=malloc,--wrap=free -o $@ libft_test.c libft_stubs.c $(OBJS)
 
 $(SRC)/%.o: $(SRC)/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 test: all
-	./$(BIN)
+	@./$(BIN)
 
 test-%: all
 	./$(BIN) $*
